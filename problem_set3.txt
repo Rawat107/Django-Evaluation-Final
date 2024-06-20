@@ -1,0 +1,30 @@
+﻿Problem set 3:
+
+
+A. Write and share a small note about your choice of system to schedule periodic tasks (such as downloading a list of ISINs every 24 hours). Why did you choose it? Is it reliable enough; Or will it scale? If not, what are the problems with it? And, what else would you recommend to fix this problem at scale in production?
+
+For scheduling periodic tasks, such as downloading a list of ISINs every 24 hours, I recommend using Celery in combination with Redis or RabbitMQ as the message broker.
+Why Celery?
+1. Reliability: Celery is a well-established task queue that has been extensively tested in various production environments. It supports complex task workflows and retries on failure, ensuring reliable execution of scheduled tasks.
+2. Scalability: Celery can scale horizontally by adding more worker nodes. This is particularly beneficial as the volume of tasks increases, allowing for distributed processing and improved performance.
+3. Flexibility: It can be integrated with various frameworks like Django and Flask, making it versatile for different types of projects.
+Potential Issues:
+* Complex Configuration: Setting up Celery, along with a message broker and result backend, can be complex and requires careful configuration.
+* Resource Intensive: For very large-scale applications, Celery can become resource-intensive, especially if not optimized properly.
+Recommendations:
+* For simpler or smaller-scale tasks, APScheduler could be a lightweight alternative. It provides straightforward scheduling capabilities and can be integrated with web frameworks.
+* For large-scale production environments, consider using Kubernetes CronJobs. They offer robust scheduling, scalability, and management of containerized tasks, fitting well with modern microservices architecture.
+
+B. In what circumstances would you use Flask instead of Django and vice versa?
+
+# Use Flask when:
+1. Lightweight Applications: Flask is ideal for smaller applications or microservices where you need more control over the components and minimal overhead.
+2. Flexibility: If you require flexibility in choosing components such as ORM, authentication, etc., Flask is highly modular and lets you pick only what you need.
+3. Quick Prototyping: Flask is great for quick prototypes and projects that might require custom solutions not bound by the constraints of a larger framework.
+# Use Django when:
+1. Full-Featured Applications: Django is suited for larger applications that need a lot of built-in features like an ORM, authentication, admin interface, and form handling right out of the box.
+2. Rapid Development: If you need to build a feature-rich application quickly, Django’s “batteries-included” approach can save a lot of development time.
+3. Convention Over Configuration: Django follows a convention-over-configuration principle, making it easier to maintain consistency across a large codebase.
+Conclusion:
+* Choose Flask for smaller projects, microservices, or when you need a lightweight and flexible framework.
+* Opt for Django when building large, complex applications that benefit from a robust and comprehensive framework with many built-in features.
